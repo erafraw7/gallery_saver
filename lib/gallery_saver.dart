@@ -27,7 +27,7 @@ class GallerySaver {
       throw ArgumentError(fileIsNotVideo);
     }
     if (!isLocalFilePath(path)) {
-      tempFile = await _downloadFile(path);
+      tempFile = await downloadFile(path);
       path = tempFile.path;
     }
     bool? result = await _channel.invokeMethod(
@@ -50,7 +50,7 @@ class GallerySaver {
       throw ArgumentError(fileIsNotImage);
     }
     if (!isLocalFilePath(path)) {
-      tempFile = await _downloadFile(path);
+      tempFile = await downloadFile(path);
       path = tempFile.path;
     }
 
@@ -65,7 +65,7 @@ class GallerySaver {
     return result;
   }
 
-  static Future<File> _downloadFile(String url) async {
+  static Future<File> downloadFile(String url) async {
     print(url);
     http.Client _client = new http.Client();
     var req = await _client.get(Uri.parse(url));
